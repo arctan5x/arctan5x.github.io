@@ -1,119 +1,144 @@
 <!DOCTYPE HTML>
 <!--
-	Ion by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+	Linear by TEMPLATED
+    templated.co @templatedco
+    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
 	<head>
-		<title>Yoon Ho Lee</title>
+		<title>YHL</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="description" content="Yoon Ho's personal Website" />
-		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-		<script src="js/jquery.min.js"></script>
+		<meta name="description" content="personal website" />
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,700,500,900' rel='stylesheet' type='text/css'>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="js/skel.min.js"></script>
-		<script src="js/skel-layers.min.js"></script>
+		<script src="js/skel-panels.min.js"></script>
 		<script src="js/init.js"></script>
 		<noscript>
-			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/skel-noscript.css" />
 			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-xlarge.css" />
+			<link rel="stylesheet" href="css/style-desktop.css" />
 		</noscript>
 	</head>
-	<body id="top">
+	<body class="homepage">
 
-		<!-- Header -->
-			<header id="header" class="skel-layers-fixed">
-				<h1><a href="#">Yoon Ho (Tony) Lee</a></h1>
+	<!-- Header -->
+		<div id="header">
+			<div id="nav-wrapper"> 
+				<!-- Nav -->
 				<nav id="nav">
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="left-sidebar.html">About Me</a></li>
-						<li><a href="right-sidebar.html">Resume</a></li>
-						<li><a href="https://github.com/arctan5x">Github</a></li>
+						<li class="active"><a href="index.html">Home</a></li>
+						<li><a href="./resume.pdf" target="_blank">Resume</a></li>
+						<li><a href="https://github.com/arctan5x" target="_blank">Github</a></li>
+						<li><a href="#footer">Contact Me</a></li>
 					</ul>
 				</nav>
-			</header>
-
-		<!-- Banner -->
-			<section id="banner">
-				<div class="inner">
-					<h2>Yoon Ho (Tony) Lee</h2>
-					<p>Undergraduate Computer Science Student at UC Berkeley</a></p>
+			</div>
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h1><a href="#">Yoon Ho (Tony) Lee</a></h1>
+					<span class="tag">Undergrad Computer Science Student at Berkeley</span>
 				</div>
-			</section>
+			</div>
+		</div>
 
-		<!-- One -->
-			<section id="one" class="wrapper style1">
-				<header class="major">
-					<h2></h2>
-					<p>About Me</p>
+	<!-- Featured -->
+		<div id="featured">
+			<div class="container">
+				<header>
+					<h2>About me</h2>
 				</header>
-				<div class="container">
-					<div class="row">
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-area-chart major"></i>
-								<h3>Education</h3>
-								<p>I am an intended Computer Science Undergraduate student, looking to declare in Spring 2015.</p>
-							</section>
-						</div>
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-refresh major"></i>
-								<h3>Entrepreneurship</h3>
-								<p>I am deeply interested in startups and hopefully I will launch a wonderful service one day.</p>
-							</section>
-						</div>
-						<div class="4u">
-							<section class="special box">
-								<i class="icon fa-cog major"></i>
-								<h3>Food</h3>
-								<p>Eating == Relieving stress.<br>Eating == Fun.</p>
-							</section>
-						</div>
-					</div>
+				<p>Hi! I am Yoon Ho Lee. You can call me Tony. I am a sophomore at the University of California at Berkeley, majoring in computer science. I enjoy going to hackathons and bringing my ideas into the real world. I love to learn and read about startup culture. Planning to launch my own one day!</p>
+				<hr />
+				<div class="row">
+					<section class="4u">
+						<span class="pennant"><span class="fa fa-book"></span></span>
+						<h3>Education</h3>
+						<p>I love to learn new things. Studying in the fields of computer science has been awesome.</p>
+					</section>
+					<section class="4u">
+						<span class="pennant"><span class="fa fa-code"></span></span>
+						<h3>Hacking</h3>
+						<p>Building an app is amazing. Codes are not limited to anything (except for memory). It is like building a house but more amazing and expandable.</p>
+					</section>
+					<section class="4u">
+						<span class="pennant"><span class="fa fa-globe"></span></span>
+						<h3>Top of my bucketlist</h3>
+						<p>My dream is to travel around the globe to taste different foods.<br>Food == Life</p>
+					</section>
+
 				</div>
-			</section>
+			</div>
+		</div>
+
+	<!-- Main "Reserved for future hackathon projects"
+		<div id="main">
+			<div id="content" class="container">
+
+				<div class="row">
+					<section class="6u">
+						<a href="#" class="image full"><img src="images/pic01.jpg" alt=""></a>
+						<header>
+							<h2>Mauris vulputate dolor</h2>
+						</header>
+						<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum.</p>
+					</section>				
+					<section class="6u">
+						<a href="#" class="image full"><img src="images/pic02.jpg" alt=""></a>
+						<header>
+							<h2>Mauris vulputate dolor</h2>
+						</header>
+						<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum.</p>
+					</section>				
+				</div>
+
+				<div class="row">
+					<section class="6u">
+						<a href="#" class="image full"><img src="images/pic03.jpg" alt=""></a>
+						<header>
+							<h2>Mauris vulputate dolor</h2>
+						</header>
+						<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum.</p>
+					</section>				
+					<section class="6u">
+						<a href="#" class="image full"><img src="images/pic04.jpg" alt=""></a>
+						<header>
+							<h2>Mauris vulputate dolor</h2>
+						</header>
+						<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Donec leo, vivamus fermentum nibh in augue praesent a lacus at urna congue rutrum.</p>
+					</section>				
+				</div>
 			
-		<!-- Footer -->
-			<footer id="footer">
-				<div class="container">
-					<div class="row double">
-						<div class="6u">
-							<div class="row collapse-at-2">
-								<div class="6u">
-									<h3>Links</h3>
-									<ul class="alt">
-										<li><a href="http://www.cs.berkeley.edu/">Berkeley Computer Science</a></li>
-										<li><a href="#">Vis faucibus sed tempor</a></li>
-										<li><a href="#">Massa amet lobortis vel</a></li>
-										<li><a href="#">Nascetur nunc varius</a></li>
-									</ul>
-								</div>
-								<div class="6u">
-									<h3>Past Hacks</h3>
-									<ul class="alt">
-										<li><a href="http://arctan5x.github.io/OskiGPS/">Oski GPS</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="6u">
-							<h2>Check me out!</h2>
-							<ul class="icons">
-								<li><a href="https://www.facebook.com/Yoonho.lee93" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-								<li><a href="https://www.linkedin.com/pub/yoon-ho-tony-lee/5b/806/3b9" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-								<li><a href="http://www.pinterest.com/yoonholee93/" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
-							</ul>
-						</div>
-					</div>
-					<ul class="copyright">
-						<li>&copy; Yoon Ho Lee. All rights reserved.</li>
-						<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+			</div>
+		</div> -->
+
+	<!-- Footer -->
+		<div id="footer">
+			<div class="container">
+				<section>
+					<header>
+						<h2>Get in touch</h2>
+					</header>
+					<ul class="contact">
+						<li><a href="mailto:tonylee1993@gmail.com" class="fa fa-envelope"><span>Mail</span></a></li>
+						<li class="active"><a href="https://www.facebook.com/Yoonho.lee93" class="fa fa-facebook" target="_blank"><span>Facebook</span></a></li>
+						<li><a href="http://www.pinterest.com/yoonholee93/" class="fa fa-pinterest" target="_blank"><span>Pinterest</span></a></li>
+						<li><a href="https://www.linkedin.com/pub/yoon-ho-tony-lee/5b/806/3b9" class="fa fa-linkedin" target="_blank"><span>LinkedIn</span></a></li>
 					</ul>
-				</div>
-			</footer>
+				</section>
+			</div>
+		</div>
+
+	<!-- Copyright -->
+		<div id="copyright">
+			<div class="container">
+				&copy Yoon Ho Lee<br>
+				Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
+			</div>
+		</div>
 
 	</body>
 </html>
