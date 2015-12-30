@@ -2,14 +2,13 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    color:white;
+    color: white;
 }
 
 .content {
+	margin-top: 5px;
 	font-family: "Lato", Helvetica, Arial, sans-serif; 
 	color: #5c5c66; 
-	background-color: #fefefe; 
-	-webkit-text-size-adjust: 100%; 
 	text-align: center;
 }
 
@@ -20,7 +19,7 @@ html, body {
 img	{
 	height: 200px;
 	width: 250px;
-	max-width: 100%;
+
 	margin-top: 150px;
 	border-radius: 50%;
 	vertical-align: middle;
@@ -57,33 +56,29 @@ a i {
 	width: 30px;
 }
 
-.bar {
+.icons {
 	font-size: 25px;
 }
 
 .top-bar {
-	color: #5c5c66; 
+	top: 0;
 	padding: 0;
 	margin: 0;
 	background-color: #0099ff;
 	text-align: right;
 	position: absolute;
-	top: 0;
-	overflow: hidden;
-	padding: 0;
 	width: 100%;
-	height: 3%;
-
+	height: 23px;
 }
 
 .top-bar i {
 	padding-top: 3px;
 	margin-right: 7px;
-	width: auto;
-	height: 3%;
 	display: inline-block;
 	color: #ffffff;
 }
+
+
 
 
 
