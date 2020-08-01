@@ -1,0 +1,44 @@
+body {
+    line-height: 1.7em;
+    color: #7f8c8d;
+    font-size: 16px;
+    padding: .1em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+    color: #34495e;
+}
+
+.main-content {
+	padding: 2em;
+	padding-top: 1em;
+}
+
+#viz-conteent {
+  column-count: 2;
+}
+
+div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    width: 70px;					
+    height: 30px;					
+    padding: 3px;				
+    font: 12px sans-serif;		
+    background: #e6b737;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;
+    color: black;	
+}
+
+.line {
+  fill: none;
+  stroke-width: 1.25px;
+}
