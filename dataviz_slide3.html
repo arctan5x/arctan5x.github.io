@@ -51,7 +51,6 @@
     height = window.innerHeight * 0.5
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 
-    // append the svg object to the body of the page
     var svg = d3.select("#data-viz1")
       .append("svg")
       .attr("width", width + margin.left + margin.right)
@@ -60,7 +59,6 @@
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
-    // Parse the Data
     d3.csv("https://raw.githubusercontent.com/arctan5x/arctan5x.github.io/master/cereal.csv", function(data) {
 
       data.sort(function(a, b) {
