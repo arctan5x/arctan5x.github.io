@@ -39,12 +39,11 @@
 <br>
 <div class="main-content">
   <h4>The Cereal Analysis uses the dataset from Kaggle (https://www.kaggle.com/crawford/80-cereals) with nutritional and consumer data on 80 cereal brands</h4>
-  <h4>I hope to help you make better cereal choices based on this data analysis</h4>
+  <h4>I hope to help you know your cereals better</h4>
   
   <div id="viz-content">
-      <p>Below chart shows relationship between nutrient values and cereal brands in descending order of customer ratings.</p>
-      <p>We observe <font color="red">carbs</font>, <font color="green">protein</font>, <font color="blue">fat</font>, and <font color="purple">sugar</font> in grams per one serving size. These 4 nutrients have closer relationship to how cereal tastes. The only meaningful observation is that sugar content tends to go higher as customer ratings decrease. Therefore, sweet cereals are less preferred in the market. Other nutrients did not show a meaningful trend of relationship between preference and content.</p>
-      <p><b>Hover Over points to see the value.</b></p>
+      <p>Below chart displays customer ratings per cereal brand.Higher rating means higher preference from customers and lower rating means lower preference from customers. "All-Bran with Extra Fiber" ranks #1 rated cereal with the rating of 93.704912. "Cap'n Crunch" ranks the least rated cereal with the rating of 18.042851.</p>
+      <p><b>Hover Over bars to see the rating.</b></p>
       <div id="data-viz1"></div>
   </div>
 
@@ -52,7 +51,6 @@
     var margin = {top: 30, right: 100, bottom: 150, left: 100},
     width = window.innerWidth * 0.85,
     height = window.innerHeight * 0.5
-    var color = d3.scaleOrdinal(d3.schemeCategory10);
 
     // append the svg object to the body of the page
     var svg = d3.select("#data-viz1")
@@ -70,6 +68,10 @@
         return b.rating - a.rating;
       });
 
+      var div = d3.select("body").append("div") 
+      .attr("class", "tooltip")       
+      .style("opacity", 0);
+
       var x = d3.scaleBand()
         .range([0, width])
         .domain(data.map(function(d) { return d.name; }))
@@ -81,7 +83,7 @@
         .attr("transform", "translate(-10,0)rotate(-45)")
         .style("text-anchor", "end");
 
-      var y = d3.scaleLinear().domain([0, 30]).range([height, 0]);
+      var y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
       svg.append("g").call(d3.axisLeft(y));
 
       svg.append("text")             
@@ -99,134 +101,35 @@
       .style("text-anchor", "middle")
       .text("Value"); 
 
-
-      var line = d3.line()
-      .x(function(d) { return x(d.name); })
-      .y(function(d) { return y(Math.max(d.carbo, 0)); })
-
-      var line2 = d3.line()
-      .x(function(d) { return x(d.name); })
-      .y(function(d) { return y(Math.max(d.protein, 0)); })
-
-      var line3 = d3.line()
-      .x(function(d) { return x(d.name); })
-      .y(function(d) { return y(Math.max(d.fat, 0)); })
-
-      var line4 = d3.line()
-      .x(function(d) { return x(d.name); })
-      .y(function(d) { return y(Math.max(d.sugars, 0)); })
-
-      svg.append("path")
-      .data([data])
-      .attr("class", "line")
-      .attr("d", function(d) { return line(d); })
-      .style("stroke", function(d) { return "red"; })
-
-      svg.append("path")
-      .data([data])
-      .attr("class", "line")
-      .attr("d", function(d) { return line2(d); })
-      .style("stroke", function(d) { return "green"; })
-
-      svg.append("path")
-      .data([data])
-      .attr("class", "line")
-      .attr("d", function(d) { return line3(d); })
-      .style("stroke", function(d) { return "blue"; })
-
-      svg.append("path")
-      .data([data])
-      .attr("class", "line")
-      .attr("d", function(d) { return line4(d); })
-      .style("stroke", function(d) { return "purple"; })
-      var div = d3.select("body").append("div") 
-      .attr("class", "tooltip")       
-      .style("opacity", 0);
-
-      svg.selectAll("dot")
+      svg.selectAll("bar")
         .data(data)
-        .enter().append("circle")  
-        .attr("fill", "green")              
-        .attr("r", 2)   
-        .attr("cx", function(d) { return x(d.name); })     
-        .attr("cy", function(d) { return y(Math.max(d.protein,0)); })   
+        .enter()
+        .append("rect")
+        .attr("x", function(d) { return x(d.name); })
+        .attr("width", x.bandwidth())
+        .attr("fill", "#69b3a2")
+        .attr("height", function(d) { return height - y(0); })
+        .attr("y", function(d) { return y(0); })
         .on("mouseover", function(d) {    
-            div.transition()    
-                .duration(200)
-                .style("opacity", .9);    
-            div .html("Protein<br>" + d.protein + "g")  
-                .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY - 28) + "px");  
-            })          
+          div.transition()    
+            .duration(200)    
+            .style("opacity", .9);    
+          div.html("Rating " + d.rating)
+            .style("left", (d3.event.pageX) + "px")   
+            .style("top", (d3.event.pageY - 30) + "px");  
+        })
         .on("mouseout", function(d) {   
-            div.transition()    
-                .duration(200)    
-                .style("opacity", 0); 
+          div.transition()    
+            .duration(200)    
+            .style("opacity", 0); 
         });
 
-      svg.selectAll("dot")
-        .data(data)
-        .enter().append("circle")               
-        .attr("r", 2)  
-        .attr("fill", "red") 
-        .attr("cx", function(d) { return x(d.name); })     
-        .attr("cy", function(d) { return y(Math.max(d.carbo,0)); })   
-        .on("mouseover", function(d) {    
-            div.transition()    
-                .duration(200)
-                .style("opacity", .9);    
-            div .html("Carbs<br>" + d.carbo + "g")  
-                .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY - 28) + "px");  
-            })          
-        .on("mouseout", function(d) {   
-            div.transition()    
-                .duration(200)    
-                .style("opacity", 0); 
-        });
-
-      svg.selectAll("dot")
-        .data(data)
-        .enter().append("circle")               
-        .attr("r", 2)
-        .attr("fill", "purple") 
-        .attr("cx", function(d) { return x(d.name); })     
-        .attr("cy", function(d) { return y(Math.max(d.sugars,0)); })   
-        .on("mouseover", function(d) {    
-            div.transition()    
-                .duration(200)
-                .style("opacity", .9);    
-            div .html("Sugar<br>" + d.sugars + "g")  
-                .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY - 28) + "px");  
-            })          
-        .on("mouseout", function(d) {   
-            div.transition()    
-                .duration(200)    
-                .style("opacity", 0); 
-        });
-
-      svg.selectAll("dot")
-        .data(data)
-        .enter().append("circle")               
-        .attr("r", 2)   
-        .attr("fill", "blue") 
-        .attr("cx", function(d) { return x(d.name); })     
-        .attr("cy", function(d) { return y(Math.max(d.fat,0)); })   
-        .on("mouseover", function(d) {    
-            div.transition()    
-                .duration(200)
-                .style("opacity", .9);    
-            div .html("Fat<br>" + d.fat + "g")  
-                .style("left", (d3.event.pageX) + "px")   
-                .style("top", (d3.event.pageY - 28) + "px");  
-            })          
-        .on("mouseout", function(d) {   
-            div.transition()    
-                .duration(200)    
-                .style("opacity", 0); 
-        });
-
+      svg.selectAll("rect")
+        .transition()
+        .duration(50)
+        .attr("y", function(d) { return y(d.rating); })
+        .attr("height", function(d) { return height - y(d.rating); })
+        .delay(function(d,i){return(i*10)})
     });
   </script>
 </div>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Slide 3</title>
+
+<!-- CSS Stylesheet from https://purecss.io/ -->
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+
+<!-- My custom stylesheet -->
+<link rel="stylesheet" type="text/css" href="index.css">
+
+<!-- Icons from https://saeedalipoor.github.io/icono/ -->
+<link rel="stylesheet" href="https://icono-49d6.kxcdn.com/icono.min.css">
+
+<!-- d3 -->
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+</head>
+<body>
+
+<div class="pure-menu pure-menu-horizontal">
+    <a href="#" class="pure-menu-heading">The Cereal Analysis</a>
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="dataviz_slide1.html" class="pure-menu-link">Slide 1</a></li>
+        <li class="pure-menu-item"><a href="dataviz_slide2.html" class="pure-menu-link">Slide 2</a></li>
+        <li class="pure-menu-item"><a href="dataviz_slide3.html" class="pure-menu-link">Slide 3</a></li>
+    </ul>
+</div>
+
+<div class="pure-menu pure-menu-horizontal">
+  <ul class="pure-menu-list" style="float:left; text-align:left">
+    <li class="pure-menu-item pure-button"><a href="dataviz_slide2.html" class="pure-menu-link" ><i class="icono-caretLeft" style="color:grey"></i>Previous Slide</a></li>
+  </ul>
+</div>
+<br>
+<div class="main-content">
+  <h4>The Cereal Analysis uses the dataset from Kaggle (https://www.kaggle.com/crawford/80-cereals) with nutritional and consumer data on 80 cereal brands</h4>
+  <h4>I hope to help you know your cereals better</h4>
+  
+  <div id="viz-content">
+      <p>Below chart shows relationship between nutrient values and cereal brands in descending order of customer ratings.</p>
+      <p>We observe <font color="red">carbs</font>, <font color="green">protein</font>, <font color="blue">fat</font>, and <font color="purple">sugar</font> in grams per one serving size. These 4 nutrients have closer relationship to how cereal tastes. The only meaningful observation is that sugar content tends to go higher as customer ratings decrease. Therefore, sweet cereals are less preferred in the market. Other nutrients did not show a meaningful trend of relationship between preference and content.</p>
+      <p><b>Hover Over points to see the value.</b></p>
+      <div id="data-viz1"></div>
+  </div>
+
+  <script>
+    var margin = {top: 30, right: 100, bottom: 150, left: 100},
+    width = window.innerWidth * 0.85,
+    height = window.innerHeight * 0.5
+    var color = d3.scaleOrdinal(d3.schemeCategory10);
+
+    // append the svg object to the body of the page
+    var svg = d3.select("#data-viz1")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    // Parse the Data
+    d3.csv("https://raw.githubusercontent.com/arctan5x/arctan5x.github.io/master/cereal.csv", function(data) {
+
+      data.sort(function(a, b) {
+        return b.rating - a.rating;
+      });
+
+      var x = d3.scaleBand()
+        .range([0, width])
+        .domain(data.map(function(d) { return d.name; }))
+        .padding(0.2);
+      svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+        .attr("transform", "translate(-10,0)rotate(-45)")
+        .style("text-anchor", "end");
+
+      var y = d3.scaleLinear().domain([0, 30]).range([height, 0]);
+      svg.append("g").call(d3.axisLeft(y));
+
+      svg.append("text")             
+      .attr("transform",
+            "translate(" + (width/2) + " ," + 
+                           (height + margin.top + 120) + ")")
+      .style("text-anchor", "middle")
+      .text("Brands");
+
+      svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left + 40)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Value"); 
+
+
+      var line = d3.line()
+      .x(function(d) { return x(d.name); })
+      .y(function(d) { return y(Math.max(d.carbo, 0)); })
+
+      var line2 = d3.line()
+      .x(function(d) { return x(d.name); })
+      .y(function(d) { return y(Math.max(d.protein, 0)); })
+
+      var line3 = d3.line()
+      .x(function(d) { return x(d.name); })
+      .y(function(d) { return y(Math.max(d.fat, 0)); })
+
+      var line4 = d3.line()
+      .x(function(d) { return x(d.name); })
+      .y(function(d) { return y(Math.max(d.sugars, 0)); })
+
+      svg.append("path")
+      .data([data])
+      .attr("class", "line")
+      .attr("d", function(d) { return line(d); })
+      .style("stroke", function(d) { return "red"; })
+
+      svg.append("path")
+      .data([data])
+      .attr("class", "line")
+      .attr("d", function(d) { return line2(d); })
+      .style("stroke", function(d) { return "green"; })
+
+      svg.append("path")
+      .data([data])
+      .attr("class", "line")
+      .attr("d", function(d) { return line3(d); })
+      .style("stroke", function(d) { return "blue"; })
+
+      svg.append("path")
+      .data([data])
+      .attr("class", "line")
+      .attr("d", function(d) { return line4(d); })
+      .style("stroke", function(d) { return "purple"; })
+      var div = d3.select("body").append("div") 
+      .attr("class", "tooltip")       
+      .style("opacity", 0);
+
+      svg.selectAll("dot")
+        .data(data)
+        .enter().append("circle")  
+        .attr("fill", "green")              
+        .attr("r", 2)   
+        .attr("cx", function(d) { return x(d.name); })     
+        .attr("cy", function(d) { return y(Math.max(d.protein,0)); })   
+        .on("mouseover", function(d) {    
+            div.transition()    
+                .duration(200)
+                .style("opacity", .9);    
+            div .html("Protein<br>" + d.protein + "g")  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");  
+            })          
+        .on("mouseout", function(d) {   
+            div.transition()    
+                .duration(200)    
+                .style("opacity", 0); 
+        });
+
+      svg.selectAll("dot")
+        .data(data)
+        .enter().append("circle")               
+        .attr("r", 2)  
+        .attr("fill", "red") 
+        .attr("cx", function(d) { return x(d.name); })     
+        .attr("cy", function(d) { return y(Math.max(d.carbo,0)); })   
+        .on("mouseover", function(d) {    
+            div.transition()    
+                .duration(200)
+                .style("opacity", .9);    
+            div .html("Carbs<br>" + d.carbo + "g")  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");  
+            })          
+        .on("mouseout", function(d) {   
+            div.transition()    
+                .duration(200)    
+                .style("opacity", 0); 
+        });
+
+      svg.selectAll("dot")
+        .data(data)
+        .enter().append("circle")               
+        .attr("r", 2)
+        .attr("fill", "purple") 
+        .attr("cx", function(d) { return x(d.name); })     
+        .attr("cy", function(d) { return y(Math.max(d.sugars,0)); })   
+        .on("mouseover", function(d) {    
+            div.transition()    
+                .duration(200)
+                .style("opacity", .9);    
+            div .html("Sugar<br>" + d.sugars + "g")  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");  
+            })          
+        .on("mouseout", function(d) {   
+            div.transition()    
+                .duration(200)    
+                .style("opacity", 0); 
+        });
+
+      svg.selectAll("dot")
+        .data(data)
+        .enter().append("circle")               
+        .attr("r", 2)   
+        .attr("fill", "blue") 
+        .attr("cx", function(d) { return x(d.name); })     
+        .attr("cy", function(d) { return y(Math.max(d.fat,0)); })   
+        .on("mouseover", function(d) {    
+            div.transition()    
+                .duration(200)
+                .style("opacity", .9);    
+            div .html("Fat<br>" + d.fat + "g")  
+                .style("left", (d3.event.pageX) + "px")   
+                .style("top", (d3.event.pageY - 28) + "px");  
+            })          
+        .on("mouseout", function(d) {   
+            div.transition()    
+                .duration(200)    
+                .style("opacity", 0); 
+        });
+
+    });
+  </script>
+</div>
+</body>
+</html>
+
